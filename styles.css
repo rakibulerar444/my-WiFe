@@ -1,0 +1,160 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+
+#balloonContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+#heartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    z-index: 10;
+}
+
+.heart {
+    position: relative;
+    width: 100px; /* Adjust size */
+    height: 100px; /* Adjust size */
+    background: linear-gradient(45deg, #ff1e1e, #ff4d4d);
+    transform: rotate(-45deg);
+    animation: heartbeat 1.2s infinite;
+    opacity: 0; /* Start invisible */
+    animation-fill-mode: forwards; /* Maintain opacity after animation */
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 100px; /* Adjust size */
+    height: 100px; /* Adjust size */
+    background: linear-gradient(45deg, #ff1e1e, #ff4d4d);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -50px; /* Adjust position */
+    left: 0;
+}
+
+.heart::after {
+    left: 50px; /* Adjust position */
+    top: 0;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1) rotate(-45deg);
+    }
+    25% {
+        transform: scale(1.1) rotate(-45deg);
+    }
+    50% {
+        transform: scale(0.9) rotate(-45deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(-45deg);
+    }
+}
+
+#message {
+    position: relative;
+    font-size: 36px; /* Adjust font size */
+    color: #ffffff;
+    text-align: center;
+    z-index: 5;
+    opacity: 0; /* Start invisible */
+    font-weight: bold;
+    margin-top: 20px; /* Space between heart and message, approx. 1 cm */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+#startButton {
+    padding: 15px 30px;
+    font-size: 24px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: absolute;
+    z-index: 20;
+}
+
+#startButton:active {
+    transform: scale(0.95);
+}
+
+.hidden {
+    display: none;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -200px;
+    width: 60px;
+    height: 90px;
+    background: radial-gradient(circle at 50% 20%, #ff7e5f, #feb47b);
+    border-radius: 60% 60% 60% 60% / 90% 90% 60% 60%;
+    animation: floatUp 10s infinite ease-in-out;
+    opacity: 0;
+    box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1), 10px 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1500px);
+        opacity: 0;
+    }
+}
+
+.balloon::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 15px;
+    height: 20px;
+    background: radial-gradient(circle at 50% 50%, #ff7e5f, #feb47b);
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: #333;
+    transform: translateX(-50%);
+}
